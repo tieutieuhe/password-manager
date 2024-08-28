@@ -41,8 +41,10 @@ tree = ttk.Treeview(window, columns=("service", "username", "password", "action"
 tree.heading("service", text="Dịch vụ")
 tree.heading("username", text="Tên đăng nhập")
 tree.heading("password", text="Mật khẩu")
-tree.heading("action", text = "Action")
-tree.column("action", width = 50)  # Điều chỉnh độ rộng cột "Xóa"
+tree.heading("action", text = "Xóa")
+tree.column("action", width = 100)  # Điều chỉnh độ rộng cột "Xóa"
+tree.column("#0", width = 0, stretch = "no")
+
 
 def show_passwords():
     # Clear existing items in the Treeview before adding new data
@@ -51,8 +53,7 @@ def show_passwords():
     c.execute("SELECT service, username, password FROM passwords")
     rows = c.fetchall()
     for row in rows:
-        item = tree.insert("", tk.END, values = row)
-        tree.set(item, "action", 'Xóa')
+        tree.insert("", tk.END, values = row)
 
 
 def add_password():
